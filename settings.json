@@ -1,0 +1,183 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "disable_ai": false, // 禁用 AI 功能
+  // 自动安装扩展
+  "auto_install_extensions": {
+    "rose-pine-theme": true,
+    "catppuccin-icons": true,
+    "material-icon-theme": true,
+    "html": true,
+    "neocmake": true,
+  },
+  // 文件扫描排除项
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.cache",
+    "**/.vs",
+    "**/.idea",
+    "**/.vscode",
+  ],
+  // 内联提示：用于在编辑器中显示带提示的额外文本的配置
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "show_background": true,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50,
+  },
+  // 语言配置
+  "languages": {
+    "C++": {
+      "hard_tabs": false,
+      "tab_size": 2,
+      "format_on_save": "on",
+      "formatter": "language_server",
+      "enable_language_server": true,
+      "colorize_brackets": true,
+      "preferred_line_length": 100,
+      "soft_wrap": "preferred_line_length",
+    },
+    "CMake": {
+      "tab_size": 2,
+    },
+  },
+  "lsp": {
+    "clangd": {
+      "initialization_options": {
+        "clangdInlayHints": {
+          "enabled": true,
+          "parameterNames": true,
+          "deducedTypes": true,
+        },
+        "binary": {
+          // "path": "/path/to/clangd",
+          "arguments": [
+            // "--query-driver=clang++", // 查询指定编译器的系统 include 路径
+            "--background-index", // 后台索引整个项目，加速代码跳转
+            "--header-insertion=iwyu", // 自动插入头文件时遵循 "Include What You Use" 原则
+            // "-j=12", // 同时开启的任务数量
+            "--completion-style=detailed", // 代码补全风格：详细式
+            "--pch-storage=memory", // 预编译头文件存储在内存中
+            "--cross-file-rename", // 启用跨文件重命名功能
+            "--all-scopes-completion", // 补全时包含所有作用域的符号（包括未导入的）
+            "--enable-config", // 允许从 .clangd 文件读取配置
+            "--fallback-style=WebKit", // 格式化代码时的默认风格
+            "--pretty", // 输出格式化为可读形式（主要用于日志/调试）
+            "--clang-tidy", // 启用 clang-tidy 静态检查
+          ],
+        },
+      },
+    },
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "terminal": {
+    "font_size": 13.0,
+    "blinking": "on",
+  },
+  "project_panel": {
+    "auto_fold_dirs": false,
+  },
+  "base_keymap": "VSCode",
+  "gutter": {
+    "folds": true,
+  },
+  "cursor_blink": true,
+  "buffer_font_fallbacks": [
+    "Fira Code",
+    "Droid Sans",
+    "黑体",
+    "雅痞-简",
+    "Consolas",
+    "Courier New",
+    "monospace",
+  ],
+  "buffer_font_family": "Maple Mono NF CN",
+  // "semantic_tokens": "full",
+  "semantic_tokens": "combined",
+  "current_line_highlight": "all",
+  "selection_highlight": true,
+  "colorize_brackets": true,
+  "soft_wrap": "editor_width",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "icon_theme": "Catppuccin Mocha",
+  "theme": {
+    "mode": "system",
+    "light": "Rosé Pine Dawn",
+    "dark": "Rosé Pine",
+  },
+  "theme_overrides": {
+    "Rosé Pine Moon": {
+      "syntax": {
+        "comment": {
+          "font_style": "italic",
+          "color": "#6e6a86",
+        },
+        "comment.doc": {
+          "font_style": "italic",
+        },
+        "string": {
+          "color": "#f6c177",
+        },
+        "keyword": {
+          "color": "#3e8fb0",
+          "font_weight": 400,
+        },
+        "keyword.control": {
+          "color": "#c4a7e7",
+        },
+        "function": {
+          "color": "#ea9a97",
+        },
+        "function.method": {
+          "color": "#ea9a97",
+        },
+        "type": {
+          "color": "#9ccfd8",
+        },
+        "type.builtin": {
+          "color": "#9ccfd8",
+          "font_weight": 400,
+        },
+        "property": {
+          "color": "#e0def4",
+        },
+        "variable": {
+          "color": "#e0def4",
+        },
+        "variable.parameter": {
+          "color": "#e0def4",
+          "font_style": "italic",
+        },
+        "number": {
+          "color": "#f6c177",
+        },
+        "operator": {
+          "color": "#908caa",
+        },
+        "punctuation": {
+          "color": "#908caa",
+        },
+      },
+    },
+  },
+}
