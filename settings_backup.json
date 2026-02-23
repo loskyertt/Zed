@@ -10,7 +10,6 @@
   "disable_ai": false, // 禁用 AI 功能
   "agent_servers": {
     "OpenCode": {
-      "type": "custom",
       "command": "opencode",
       "args": ["acp"],
     },
@@ -18,7 +17,6 @@
   "restore_on_startup": "launchpad", // 启动时不恢复上次会话
   // 自动安装扩展
   "auto_install_extensions": {
-    "opencode": true,
     "catppuccin": true,
     "material-icon-theme": true,
     "git-firefly": true,
