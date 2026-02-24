@@ -18,9 +18,8 @@
   "restore_on_startup": "launchpad", // 启动时不恢复上次会话
   // 自动安装扩展
   "auto_install_extensions": {
-    "opencode": true,
     "catppuccin": true,
-    "material-icon-theme": true,
+    "vscode-icons": true,
     "git-firefly": true,
     "markdown-oxide": true,
     "html": true,
@@ -71,34 +70,29 @@
   },
   "lsp": {
     "clangd": {
+      "binary": {
+        // "path": "/path/to/clangd",
+        "arguments": [
+          // "--query-driver=clang++", // 查询指定编译器的系统 include 路径
+          "--background-index", // 后台索引整个项目，加速代码跳转
+          "--header-insertion=iwyu", // 自动插入头文件时遵循 "Include What You Use" 原则
+          // "-j=12", // 同时开启的任务数量
+          "--completion-style=detailed", // 代码补全风格：详细式
+          "--pch-storage=memory", // 预编译头文件存储在内存中
+          "--cross-file-rename", // 启用跨文件重命名功能
+          "--all-scopes-completion", // 补全时包含所有作用域的符号（包括未导入的）
+          "--enable-config", // 允许从 .clangd 文件读取配置
+          "--fallback-style=WebKit", // 格式化代码时的默认风格
+          "--pretty", // 输出格式化为可读形式（主要用于日志/调试）
+          "--clang-tidy", // 启用 clang-tidy 静态检查
+        ],
+      },
       "initialization_options": {
         "clangdInlayHints": {
           "enabled": true,
           "parameterNames": true,
           "deducedTypes": true,
         },
-        "binary": {
-          // "path": "/path/to/clangd",
-          "arguments": [
-            // "--query-driver=clang++", // 查询指定编译器的系统 include 路径
-            "--background-index", // 后台索引整个项目，加速代码跳转
-            "--header-insertion=iwyu", // 自动插入头文件时遵循 "Include What You Use" 原则
-            // "-j=12", // 同时开启的任务数量
-            "--completion-style=detailed", // 代码补全风格：详细式
-            "--pch-storage=memory", // 预编译头文件存储在内存中
-            "--cross-file-rename", // 启用跨文件重命名功能
-            "--all-scopes-completion", // 补全时包含所有作用域的符号（包括未导入的）
-            "--enable-config", // 允许从 .clangd 文件读取配置
-            "--fallback-style=WebKit", // 格式化代码时的默认风格
-            "--pretty", // 输出格式化为可读形式（主要用于日志/调试）
-            "--clang-tidy", // 启用 clang-tidy 静态检查
-          ],
-        },
-      },
-    },
-    "cmake": {
-      "initialization_options": {
-        // "online": false, // 禁用在线功能
       },
     },
   },
@@ -135,10 +129,10 @@
   "soft_wrap": "editor_width",
   "ui_font_size": 16,
   "buffer_font_size": 15,
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": "VSCode Icons for Zed (Dark Angular)",
   "theme": {
-    "mode": "system",
-    "light": "Catppuccin Latte - No Italics",
-    "dark": "Catppuccin Mocha - No Italics",
+    "mode": "dark",
+    "light": "Catppuccin Latte (flamingo)",
+    "dark": "Catppuccin Mocha (peach)",
   },
 }
