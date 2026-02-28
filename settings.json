@@ -7,7 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "disable_ai": false, // 禁用 AI 功能
+  "disable_ai": true, // 禁用 AI 功能
   "agent_servers": {
     "OpenCode": {
       "type": "custom",
@@ -18,12 +18,12 @@
   "restore_on_startup": "launchpad", // 启动时不恢复上次会话
   // 自动安装扩展
   "auto_install_extensions": {
-    "catppuccin": true,
     "vscode-icons": true,
     "git-firefly": true,
     "markdown-oxide": true,
     "html": true,
     "neocmake": true,
+    "toml": true,
   },
   // 文件扫描排除项
   "file_scan_exclusions": [
@@ -41,6 +41,8 @@
     "**/.idea",
     "**/.vscode",
     "**/__pycache__",
+    "cmake-build-debug",
+    "out",
   ],
   // 内联提示：用于在编辑器中显示带提示的额外文本的配置
   "inlay_hints": {
@@ -51,6 +53,14 @@
     "show_background": true,
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50,
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true, // 开启行内诊断显示
+      "max_severity": "error",
+      "update_debounce_ms": 150, // 延迟更新时间（毫秒）
+      "padding": 4, // 代码与诊断信息之间的空格数
+    },
   },
   // 语言配置
   "languages": {
@@ -71,12 +81,11 @@
   "lsp": {
     "clangd": {
       "binary": {
-        // "path": "/path/to/clangd",
+        "path": "clangd",
         "arguments": [
-          // "--query-driver=clang++", // 查询指定编译器的系统 include 路径
+          // "-j=12", // 同时开启的任务数量
           "--background-index", // 后台索引整个项目，加速代码跳转
           "--header-insertion=iwyu", // 自动插入头文件时遵循 "Include What You Use" 原则
-          // "-j=12", // 同时开启的任务数量
           "--completion-style=detailed", // 代码补全风格：详细式
           "--pch-storage=memory", // 预编译头文件存储在内存中
           "--cross-file-rename", // 启用跨文件重命名功能
@@ -133,6 +142,23 @@
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Latte (flamingo)",
-    "dark": "Catppuccin Mocha (peach)",
+    "dark": "Monokai Pro (CE)",
+  },
+  "theme_overrides": {
+    "Monokai Pro (CE)": {
+      "syntax": {
+        "hint": {
+          "color": "#6c7086",
+          "font_style": "italic",
+        },
+      },
+      "players": [
+        {
+          // 橙红色方案
+          "selection": "#8b4513",
+          "cursor": "#fcfcfa",
+        },
+      ],
+    },
   },
 }
