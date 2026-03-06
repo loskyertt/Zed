@@ -7,14 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  // AI 功能设置
+  "wsl_connections": [
+    {
+      "distro_name": "EndeavourOS",
+      "user": null,
+      "projects": [
+        {
+          "paths": [
+            "/home/sky"
+          ]
+        }
+      ]
+    }
+  ],
   "disable_ai": true, // 禁用 AI 功能
-  "agent_servers": {
-    "OpenCode": {
-      "type": "custom",
-      "command": "opencode",
-      "args": ["acp"],
-    },
+  "edit_predictions": {
+    "mode": "eager", // 编辑预测模式，"eager" 表示在用户输入时立即显示预测结果
+    "provider": "copilot",
   },
+  "agent_ui_font_size": 16, // 代理界面字体大小
+  "agent_buffer_font_size": 14, // 代理缓冲区字体大小
+  // "agent_servers": {
+  //   "OpenCode": {
+  //     "type": "custom", // 服务器类型，使用自定义命令启动
+  //     "command": "opencode", // 启动 agent 的命令（需要本地安装 opencode）
+  //     "args": ["acp"], // 启动代理的参数
+  //   },
+  // },
   "restore_on_startup": "launchpad", // 启动时不恢复上次会话
   // 自动安装扩展
   "auto_install_extensions": {
@@ -51,23 +71,24 @@
     "show_parameter_hints": true,
     "show_other_hints": true,
     "show_background": true,
-    "edit_debounce_ms": 700,
+    "edit_debounce_ms": 150,
     "scroll_debounce_ms": 50,
   },
   "diagnostics": {
     "inline": {
       "enabled": true, // 开启行内诊断显示
-      "max_severity": "error",
+      "max_severity": "error", // 显示的最大诊断级别（error, warning, info, hint）
       "update_debounce_ms": 150, // 延迟更新时间（毫秒）
       "padding": 4, // 代码与诊断信息之间的空格数
     },
   },
+  "format_on_save": "off", // 全局禁用保存时自动格式化
   // 语言配置
   "languages": {
     "C++": {
       "hard_tabs": false,
       "tab_size": 2,
-      "format_on_save": "on",
+      // "format_on_save": "on", // 启用保存时自动格式化
       "formatter": "language_server",
       "enable_language_server": true,
       "colorize_brackets": true,
@@ -76,6 +97,14 @@
     },
     "CMake": {
       "tab_size": 2,
+    },
+    "Python": {
+      // "format_on_save": "on", // 启用保存时自动格式化
+      "language_servers": [
+        "ty", // 启用 Ty
+        "ruff", // 启用 Ruff
+        "!basedpyright", // 禁用 basedpyright
+      ],
     },
   },
   "lsp": {
@@ -101,6 +130,14 @@
           "enabled": true,
           "parameterNames": true,
           "deducedTypes": true,
+        },
+      },
+    },
+    "basedpyright": {
+      "settings": {
+        "analysis": {
+          "diagnosticMode": "workspace", // 诊断工作区中的所有文件
+          // "inlayHints.callArgumentNames": false, // 禁用函数参数的内联提示
         },
       },
     },

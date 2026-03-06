@@ -20,8 +20,14 @@
   },
   {
     "context": "Editor",
-      "bindings": {
-      "ctrl-alt-l": "editor::RestartLanguageServer"
-    }
-  }
+    "bindings": {
+      "alt-r": "editor::RestartLanguageServer",
+    },
+  },
+  {
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "tab": "editor::Tab", // 让 Tab 只插入缩进，不接受预测
+    },
+  },
 ]
