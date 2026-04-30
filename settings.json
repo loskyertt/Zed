@@ -7,24 +7,71 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  // AI 功能设置
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "minimap": {
+    "current_line_highlight": "all",
+    "display_in": "active_editor",
+    "thumb": "always",
+    "show": "always",
+  },
   "wsl_connections": [
     {
       "distro_name": "EndeavourOS",
       "user": null,
       "projects": [
         {
-          "paths": [
-            "/home/sky"
-          ]
-        }
-      ]
-    }
+          "paths": ["/home/sky"],
+        },
+        {
+          "paths": ["/home/sky/Dev/forest_fsl/./"],
+        },
+      ],
+    },
   ],
   "disable_ai": true, // 禁用 AI 功能
+  "language_models": {
+    "openai_compatible": {
+      "ModelScope": {
+        "api_url": "https://api-inference.modelscope.cn/v1",
+        "available_models": [
+          {
+            "name": "Qwen/Qwen3.5-27B",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+            },
+          },
+        ],
+      },
+    },
+  },
+  "agent_servers": {},
   "edit_predictions": {
-    "mode": "eager", // 编辑预测模式，"eager" 表示在用户输入时立即显示预测结果
-    "provider": "copilot",
+    "mode": "subtle", // "eager"（自动显示）/ "subtle"（按住 Alt 显示）
+    "provider": "zed",
+  },
+  "agent": {
+    "dock": "right",
+    "default_model": {
+      "provider": "ModelScope",
+      "model": "Qwen/Qwen3.5-27B",
+      "enable_thinking": false,
+    },
+    "enabled": true, // 关闭 AI Agent 面板（对话窗口）
   },
   "agent_ui_font_size": 16, // 代理界面字体大小
   "agent_buffer_font_size": 14, // 代理缓冲区字体大小
@@ -44,6 +91,8 @@
     "html": true,
     "neocmake": true,
     "toml": true,
+    "visual-assist-dark": true,
+    // "aura-theme": true,
   },
   // 文件扫描排除项
   "file_scan_exclusions": [
@@ -73,6 +122,15 @@
     "show_background": true,
     "edit_debounce_ms": 150,
     "scroll_debounce_ms": 50,
+
+    // 按住 Alt+Shift 时切换（隐藏）内联提示
+    "toggle_on_modifiers_press": {
+      "alt": true,
+      "shift": true,
+      "control": false,
+      "platform": false,
+      "function": false,
+    },
   },
   "diagnostics": {
     "inline": {
@@ -82,6 +140,8 @@
       "padding": 4, // 代码与诊断信息之间的空格数
     },
   },
+  "show_wrap_guides": true, // 显示标尺线
+  "preferred_line_length": 120, // 标尺线长度设置
   "format_on_save": "off", // 全局禁用保存时自动格式化
   // 语言配置
   "languages": {
@@ -92,7 +152,7 @@
       "formatter": "language_server",
       "enable_language_server": true,
       "colorize_brackets": true,
-      "preferred_line_length": 100,
+      // "preferred_line_length": 120,
       "soft_wrap": "preferred_line_length",
     },
     "CMake": {
@@ -123,6 +183,7 @@
           "--fallback-style=WebKit", // 格式化代码时的默认风格
           "--pretty", // 输出格式化为可读形式（主要用于日志/调试）
           "--clang-tidy", // 启用 clang-tidy 静态检查
+          "--function-arg-placeholders=true", // 补全时插入参数占位符
         ],
       },
       "initialization_options": {
@@ -146,10 +207,11 @@
     "trust_all_worktrees": true,
   },
   "terminal": {
-    "font_size": 13.0,
+    "font_size": 14.0,
     "blinking": "on",
   },
   "project_panel": {
+    "dock": "left",
     "auto_fold_dirs": false,
   },
   "base_keymap": "VSCode",
@@ -157,45 +219,89 @@
     "folds": true,
   },
   "cursor_blink": true,
-  "buffer_font_fallbacks": [
-    "Fira Code",
-    "Droid Sans",
-    "黑体",
-    "雅痞-简",
-    "Consolas",
-    "Courier New",
-    "monospace",
-  ],
+  "buffer_font_fallbacks": ["Fira Code", "Droid Sans", "黑体", "雅痞-简", "Consolas", "Courier New", "monospace"],
   "buffer_font_family": "Maple Mono NF CN",
-  // "semantic_tokens": "full",
-  "semantic_tokens": "combined",
+  "buffer_font_size": 16.0,
+  "ui_font_size": 16,
+  "buffer_font_features": {
+    "calt": true, // 上下文替代
+    // "liga": true, // 标准连字
+    // "ss01": true, // 特定于编程的连字集（因字体而异）
+  },
+  // "semantic_tokens": "full",  // 完全取代 Tree-sitter 高亮，仅使用 LSP 提供的语义标记
+  "semantic_tokens": "combined", // 将 LSP 的语义信息与 Tree-sitter 的基础语法高亮叠加使用
   "current_line_highlight": "all",
   "selection_highlight": true,
   "colorize_brackets": true,
   "soft_wrap": "editor_width",
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
   "icon_theme": "VSCode Icons for Zed (Dark Angular)",
   "theme": {
     "mode": "dark",
-    "light": "Catppuccin Latte (flamingo)",
-    "dark": "Monokai Pro (CE)",
+    "light": "Horizon Bright",
+    "dark": "Visual Assist Dark",
   },
+  // 主题覆写
   "theme_overrides": {
+    // 主题：Monokai Pro (CE)
     "Monokai Pro (CE)": {
+      "scrollbar.thumb.background": "#4c4f69", // 滚动条滑块（正在拖动或可见的部分）的颜色
+      "scrollbar.thumb.hover_background": "#4c4f69", // 鼠标悬停在滑块上的颜色
+      "scrollbar.thumb.active_background": "#4c4f69", // 鼠标按下（拖动中）滑块的颜色
+      // "scrollbar.track.background": "#00000000", // 滚动条轨道的背景色（通常设为透明或极淡色）
+      // "scrollbar.track.border": "#00000000", // 滚动条轨道的边框颜色
+      "element.selected": "#7287fd", // 左侧面板（Project PaneL）选中文件的背景色
+      // "element.hover": "#b4befe",  // 鼠标悬停在文件上的颜色
+      "editor.document_highlight.read_background": "#4b3621", // 读取该变量时的背景高亮色
+      "editor.document_highlight.write_background": "#5d4037", // 写入（赋值）该变量时的背景高亮色
+      "players": [
+        {
+          // 橙红色方案：#8b4513
+          "selection": "#8b4513",
+          "cursor": "#fcfcfa",
+        },
+      ],
       "syntax": {
         "hint": {
           "color": "#6c7086",
           "font_style": "italic",
         },
       },
+    },
+    // 主题：Aura Dark
+    "Aura Dark": {
+      "editor.document_highlight.read_background": "#4b3621", // 读取该变量时的背景高亮色
+      "editor.document_highlight.write_background": "#5d4037", // 写入（赋值）该变量时的背景高亮色
+      // "border.variant": "#15141C",
+      // "border": "#15141C",
+      // "title_bar.background": "#15141C",
+      "panel.background": "#15141C",
+      "panel.focused_border": "#4E466E",
       "players": [
         {
-          // 橙红色方案
           "selection": "#8b4513",
-          "cursor": "#fcfcfa",
+          "cursor": "#BD9DFF",
         },
       ],
+      "syntax": {
+        "hint": {
+          "color": "#6c7086",
+          "font_style": "italic",
+        },
+        "comment": {
+          "font_style": "italic",
+        },
+        "comment.doc": {
+          // "font_style": "italic",
+        },
+      },
     },
+  },
+  // 彩虹缩进
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 2,
+    "active_line_width": 4,
+    "coloring": "indent_aware",
+    // "background_coloring": "indent_aware"  // 彩色缩进背景
   },
 }

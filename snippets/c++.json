@@ -2,10 +2,11 @@
   "HEADER": {
     "prefix": "loskyertt",
     "body": [
-      "/*",
+      "/**",
       "@Author  :   loskyertt ",
       "@Blog    :   https://github.com/loskyertt ",
       "@Desc    :   ${1:.....}",
+      "@Note    :   ${2:.....}",
       "*/",
       "",
       "$0"

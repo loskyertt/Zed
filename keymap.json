@@ -29,5 +29,5 @@
     "bindings": {
       "tab": "editor::Tab", // 让 Tab 只插入缩进，不接受预测
     },
-  },
+  }
 ]
