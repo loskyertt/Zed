@@ -8,13 +8,13 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "git_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "minimap": {
     "current_line_highlight": "all",
@@ -92,7 +92,6 @@
     "neocmake": true,
     "toml": true,
     "visual-assist-dark": true,
-    // "aura-theme": true,
   },
   // 文件扫描排除项
   "file_scan_exclusions": [
@@ -123,11 +122,11 @@
     "edit_debounce_ms": 150,
     "scroll_debounce_ms": 50,
 
-    // 按住 Alt+Shift 时切换（隐藏）内联提示
+    // 按住 Alt+ctrl 时切换（隐藏）内联提示
     "toggle_on_modifiers_press": {
       "alt": true,
-      "shift": true,
-      "control": false,
+      "shift": false,
+      "control": true,
       "platform": false,
       "function": false,
     },
@@ -237,7 +236,7 @@
   "icon_theme": "VSCode Icons for Zed (Dark Angular)",
   "theme": {
     "mode": "dark",
-    "light": "Horizon Bright",
+    "light": "Catppuccin Latte (peach)",
     "dark": "Visual Assist Dark",
   },
   // 主题覆写
@@ -267,8 +266,8 @@
         },
       },
     },
-    // 主题：Aura Dark
-    "Aura Dark": {
+    // 主题：Visual Assist Dark
+    "Visual Assist Dark": {
       "editor.document_highlight.read_background": "#4b3621", // 读取该变量时的背景高亮色
       "editor.document_highlight.write_background": "#5d4037", // 写入（赋值）该变量时的背景高亮色
       // "border.variant": "#15141C",
